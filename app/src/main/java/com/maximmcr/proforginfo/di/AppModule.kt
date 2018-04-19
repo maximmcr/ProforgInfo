@@ -9,10 +9,11 @@ import javax.inject.Singleton
 @Module
 abstract class AppModule {
 
+    @Module
     companion object {
+        @JvmStatic
         @Provides
         @Singleton
-        fun context(app: App) : Context = app.applicationContext
+        fun context(app: App): Context = app.applicationContext
     }
-
 }

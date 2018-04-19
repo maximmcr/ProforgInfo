@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
+
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion 27
@@ -25,7 +25,7 @@ android {
 }
 
 ext {
-    dagger = '2.13'
+    daggerVersion = '2.13'
 }
 
 dependencies {
@@ -37,14 +37,22 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //Dagger 2
-    implementation "com.google.dagger:dagger:$dagger"
-    kapt "com.google.dagger:dagger-compiler:$dagger"
+    // Dagger 2
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
-    //Dagger-Android
-    implementation "com.google.dagger:dagger-android:$dagger"
-    kapt "com.google.dagger:dagger-android-processor:$dagger"
+    // db
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+    implementation 'io.objectbox:objectbox-rxjava:0.9.8'
 
-    //Если мы собираемся использовать support библиотеку
-    implementation "com.google.dagger:dagger-android-support:$dagger"
+    // rx
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
+
 }
