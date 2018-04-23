@@ -5,48 +5,49 @@ import com.maximmcr.proforginfo.data.local.model.Order
 import io.reactivex.Observable
 import io.reactivex.Single
 
-interface Repository {
+interface UserOrderRepo {
+    fun add(monthId: Long, order: Order): Boolean
+    fun remove(order: Order)
+    fun change(order: Order)
+    fun get(id: Long): Single<Order>
+    fun getForMonth(monthId: Long): Observable<List<Order>>
+}
 
-    interface DatabaseSource {
+interface UserMonthRepo {
+    fun add(timestamp: String): Boolean
+    fun remove(id: Long)
+    fun getAll(): Observable<List<Month>>
+    fun syncWithRemote(timestamp: String, firebaseId: String): Single<Boolean>
 
-        fun addMonth(timestamp: String): Boolean
-        fun removeMonth(id: Long)
-        fun getMonth(id: Long): Single<Month>
-        fun getAllMonthes(): Observable<List<Month>>
+    fun getRemoteId(timestamp: String): Single<String>
+    fun sendOrder(timestamp: String): Single<Boolean>
+    fun removeMonthOrder()
 
-        fun addOrder(monthId: Long, order: Order): Boolean
-        fun changeOrder(order: Order)
-        fun deleteOrder(order: Order)
-        fun getOrder(id: Long): Single<Order>
+    fun changePaymentStatus(timestamp: String, status: Boolean): Single<Boolean>
+}
 
-        fun getOrdersForMonth(monthId: Long): Observable<List<Order>>
+interface GroupRepo {
+    fun add()
+    fun get()
+    fun getAll()
+    fun change()
+    fun delete()
 
-    }
+    fun isAdmin()
+    fun isLoggedIn()
+}
 
-    interface ForeignSource {
-        fun getMonth(timestamp: String)
-        fun getMonthes()
-        fun getGroupInfo()
-    }
+interface PriceRepo {
+    fun get()
+    fun change()
+}
 
-    interface ForeignUserSource : ForeignSource {
+interface GroupOrderRepo {
+    fun getOrdersByMonth()
+    fun getOrderById()
+}
 
-        fun addOrUpdateGroupOrder(timestamp: String, isPaid: Boolean)
-        fun changePaymentStatus(timestamp: String, isPaid: Boolean)
-
-    }
-
-    interface ForeignAdminSource : ForeignSource {
-
-        fun addMonth(timestamp: String)
-        fun updateGroupInfo()
-        fun getMonthOrders(timestamp: String)
-        fun getUsers()
-        fun getUser(userId: String)
-        fun getUserLastOrder(userId: String)
-        fun getUserOrders(userId: String)
-        fun makeUserAdmin(userId: String, isAdmin: Boolean)
-
-    }
-
+interface GroupUserRepo {
+    fun getAll()
+    fun get()
 }

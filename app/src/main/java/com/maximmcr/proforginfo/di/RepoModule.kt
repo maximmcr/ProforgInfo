@@ -1,23 +1,27 @@
 package com.maximmcr.proforginfo.di
 
-import com.maximmcr.proforginfo.data.Repository
-import com.maximmcr.proforginfo.data.RepositoryImpl
-import dagger.Binds
+import android.content.Context
+import com.google.firebase.database.FirebaseDatabase
+import com.maximmcr.proforginfo.data.local.model.MyObjectBox
 import dagger.Module
-import javax.inject.Named
+import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 abstract class RepoModule {
 
-    @Binds
-    @Named("main")
-    abstract fun repository(impl: RepositoryImpl) : Repository
+    @Module
+    companion object {
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideDb(context: Context) = MyObjectBox.builder().androidContext(context).build()
 
-//    @Binds
-//    @Named("local")
-//    abstract fun repository(impl: RepositoryImpl) : Repository
-//
-//    @Binds
-//    @Named("firebase")
-//    abstract fun repository(impl: RepositoryImpl) : Repository
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideFirebaseDb() = FirebaseDatabase.getInstance()
+    }
+
+
 }

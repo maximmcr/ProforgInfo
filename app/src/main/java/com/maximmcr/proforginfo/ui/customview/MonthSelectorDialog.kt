@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment
 import android.widget.DatePicker
 import java.util.*
 import android.view.View
+import com.maximmcr.proforginfo.data.local.model.formatDate
 
 
 class MonthSelectorDialog : DialogFragment(), DatePickerDialog.OnDateSetListener {
@@ -18,7 +19,7 @@ class MonthSelectorDialog : DialogFragment(), DatePickerDialog.OnDateSetListener
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = with(Calendar.getInstance()) {
         return object : DatePickerDialog(
-                activity!!,
+                context,
                 AlertDialog.THEME_HOLO_DARK,
                 this@MonthSelectorDialog,
                 get(Calendar.YEAR),
@@ -42,5 +43,3 @@ class MonthSelectorDialog : DialogFragment(), DatePickerDialog.OnDateSetListener
         if (activity is OnDateSelected) (activity as OnDateSelected).onDateSelected(formatDate(year, month))
     }
 }
-
-fun formatDate(year: Int, month: Int) = "$year-$month"
