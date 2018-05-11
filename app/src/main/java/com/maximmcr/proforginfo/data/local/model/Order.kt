@@ -11,18 +11,16 @@ class Order {
     lateinit var month: ToOne<Month>
     lateinit var customerName: String
 
-    var metroUnlim: Int = 0
-    var metroBusUnlim: Int = 0
-    var metroTrolleybusUnlim: Int = 0
-    var metroTramUnlim: Int = 0
-
-    var metro46: Int = 0
-    var metroBus46: Int = 0
-    var metroTrolleybus46: Int = 0
-    var metroTram46: Int = 0
-
-    var metro62: Int = 0
-    var metroBus62: Int = 0
-    var metroTrolleybus62: Int = 0
-    var metroTram62: Int = 0
+    var m: Int = 0
+    var mBus: Int = 0
+    var mTrolleybus: Int = 0
+    var mTram: Int = 0
+    var m46: Int = 0
+    var mBus46: Int = 0
+    var mTrolleybus46: Int = 0
+    var mTram46: Int = 0
+    var m62: Int = 0
+    var mBus62: Int = 0
+    var mTrolleybus62: Int = 0
+    var mTram62: Int = 0
 }

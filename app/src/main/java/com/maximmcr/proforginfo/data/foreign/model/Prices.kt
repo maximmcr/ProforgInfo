@@ -1,5 +1,7 @@
 package com.maximmcr.proforginfo.data.foreign.model
 
+import com.google.firebase.database.Exclude
+
 
 data class Prices(
 		var m: Int,
@@ -13,5 +15,6 @@ data class Prices(
 		var mTram62: Int,
 		var mTrolleybus: Int,
 		var mTrolleybus46: Int,
-		var mTrolleybus62: Int
+		var mTrolleybus62: Int,
+		@Exclude var id: String? = null
 )

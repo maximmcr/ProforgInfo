@@ -1,58 +1,46 @@
 package com.maximmcr.proforginfo.ui.groups
 
-import android.app.Activity
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.maximmcr.proforginfo.R
-import kotlinx.android.synthetic.main.activity_groups.*
+import com.maximmcr.proforginfo.data.foreign.model.Group
+import com.maximmcr.proforginfo.ui.base.BaseActivity
 
-class GroupsActivity : AppCompatActivity() {
-
-    companion object {
-        val RC_SIGN_IN = 123
-    }
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var fbUser: FirebaseUser
+class GroupsActivity : BaseActivity(), Contract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_groups)
-        auth = FirebaseAuth.getInstance()
     }
 
-    override fun onStart() {
-        super.onStart()
-        fbUser = auth.currentUser!!
-        Snackbar.make(main, "OK - ${fbUser.uid}", Snackbar.LENGTH_LONG).show()
-        val providers = listOf(
-                AuthUI.IdpConfig.EmailBuilder().build(),
-                AuthUI.IdpConfig.GoogleBuilder().build()
-        )
-        button.setOnClickListener {
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(providers)
-                            .build(),
-                    RC_SIGN_IN)
-        }
+    override fun getSavedPresenter(): Any {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun attachPresenter() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-        if (requestCode == RC_SIGN_IN) {
-            val response = IdpResponse.fromResultIntent(data)
-            if (resultCode == Activity.RESULT_OK) {
-                Snackbar.make(main, "OK - ${fbUser.uid}", Snackbar.LENGTH_LONG).show()
-            }
-        }
+    override fun detachPresenter() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun finishPresenter() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showGroups(groups: List<Group>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showAddGroupDialog() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showGroupScreen(group: Group) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showSnack(msg: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

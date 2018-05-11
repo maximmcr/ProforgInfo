@@ -13,7 +13,7 @@ class Month {
     @Backlink
     lateinit var orders: ToMany<Order>
     lateinit var timestamp: String
-    lateinit var firebaseId: String
+    var fMonthId: String? = null
     var isPayed: Boolean = false
 
     fun name(): String = with(timestamp.split("-")) {
@@ -22,3 +22,4 @@ class Month {
 }
 
 fun formatDate(year: Int, month: Int) = "$year-$month"
+fun getDate(date: String) = date.split("-").map { it.toInt() }

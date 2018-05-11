@@ -42,18 +42,14 @@ class UserOrderImpl(boxStore: BoxStore) : UserOrderRepo {
         return RxQuery
                 .single(query)
                 .map { it[0] }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())    }
+    }
 
     override fun getForMonth(monthId: Long): Observable<List<Order>> {
         val query = orders
                 .query()
                 .equal(Order_.monthId, monthId)
                 .build()
-        return RxQuery
-                .observable(query)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        return RxQuery.observable(query)
     }
 }
 
@@ -91,23 +87,19 @@ class UserMonthImpl(boxStore: BoxStore) : UserMonthRepo {
     }
 
     override fun syncWithRemote(timestamp: String, firebaseId: String): Single<Boolean> {
-        monthes.find(Month_.timestamp, timestamp).first().firebaseId = firebaseId
+        monthes.find(Month_.timestamp, timestamp).first().fMonthId = firebaseId
         return Single.just(true)
     }
 
-    override fun getRemoteId(timestamp: String): Single<String> {
+    override fun getRemoteId(groupId: String): Observable<Pair<String, String>> {
         throw RuntimeException("Stub!")
     }
 
-    override fun sendOrder(timestamp: String): Single<Boolean> {
+    override fun sendOrder(order: com.maximmcr.proforginfo.data.foreign.model.Order): Single<Boolean> {
         throw RuntimeException("Stub!")
     }
 
-    override fun removeMonthOrder() {
-        throw RuntimeException("Stub!")
-    }
-
-    override fun changePaymentStatus(timestamp: String, status: Boolean): Single<Boolean> {
+    override fun changePaymentStatus(status: Boolean, userId: String, monthId: String, timestamp: String): Single<Boolean> {
         monthes.find(Month_.timestamp, timestamp).first().isPayed = status
         return Single.just(status)
     }

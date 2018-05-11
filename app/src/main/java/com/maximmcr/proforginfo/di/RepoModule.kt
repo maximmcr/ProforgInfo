@@ -1,6 +1,8 @@
 package com.maximmcr.proforginfo.di
 
 import android.content.Context
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.maximmcr.proforginfo.data.local.model.MyObjectBox
 import dagger.Module
@@ -20,8 +22,28 @@ abstract class RepoModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun provideFirebaseDb() = FirebaseDatabase.getInstance()
-    }
+        fun provideFirebaseDb() = with(FirebaseDatabase.getInstance()) {
+            setPersistenceEnabled(true)
+            reference
+        }
 
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideAuthUI() = AuthUI.getInstance()
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideAuthProviders() = listOf(
+                AuthUI.IdpConfig.EmailBuilder().build(),
+                AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideFirebaseAuth() = FirebaseAuth.getInstance()
+    }
 
 }

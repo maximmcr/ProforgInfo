@@ -1,5 +1,6 @@
 package com.maximmcr.proforginfo.data
 
+import com.maximmcr.proforginfo.data.foreign.model.Group
 import com.maximmcr.proforginfo.data.local.model.Month
 import com.maximmcr.proforginfo.data.local.model.Order
 import io.reactivex.Observable
@@ -19,22 +20,20 @@ interface UserMonthRepo {
     fun getAll(): Observable<List<Month>>
     fun syncWithRemote(timestamp: String, firebaseId: String): Single<Boolean>
 
-    fun getRemoteId(timestamp: String): Single<String>
-    fun sendOrder(timestamp: String): Single<Boolean>
-    fun removeMonthOrder()
+    fun getRemoteId(groupId: String): Observable<Pair<String, String>>
+    fun sendOrder(order: com.maximmcr.proforginfo.data.foreign.model.Order): Single<Boolean>
 
-    fun changePaymentStatus(timestamp: String, status: Boolean): Single<Boolean>
+    fun changePaymentStatus(status: Boolean, userId: String, monthId: String, timestamp: String): Single<Boolean>
 }
 
 interface GroupRepo {
-    fun add()
-    fun get()
-    fun getAll()
-    fun change()
-    fun delete()
+    fun add(group: Group): Single<String>
+    fun get(id: String): Single<Group>
+    fun getAll(): Observable<Group>
+    fun change(group: Group): Single<Boolean>
+    fun delete(groupId: String): Single<Boolean>
 
-    fun isAdmin()
-    fun isLoggedIn()
+    fun isAdmin(userId: String, groupId: String): Single<Boolean>
 }
 
 interface PriceRepo {
@@ -47,7 +46,15 @@ interface GroupOrderRepo {
     fun getOrderById()
 }
 
-interface GroupUserRepo {
+interface GroupUsersRepo {
     fun getAll()
     fun get()
+    fun add()
+    fun delete()
+}
+
+interface AuthRepo {
+    fun isLoggedIn(): Boolean
+    fun login()
+    fun logout()
 }
