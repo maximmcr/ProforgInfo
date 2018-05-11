@@ -1,6 +1,5 @@
 package com.maximmcr.proforginfo.ui.groups
 
-import com.maximmcr.proforginfo.data.foreign.model.Group
 import com.maximmcr.proforginfo.ui.base.MvpPresenter
 import com.maximmcr.proforginfo.ui.base.MvpView
 

@@ -2,7 +2,6 @@ package com.maximmcr.proforginfo.ui.groups
 
 import android.os.Bundle
 import com.maximmcr.proforginfo.R
-import com.maximmcr.proforginfo.data.foreign.model.Group
 import com.maximmcr.proforginfo.ui.base.BaseActivity
 
 class GroupsActivity : BaseActivity(), Contract.View {

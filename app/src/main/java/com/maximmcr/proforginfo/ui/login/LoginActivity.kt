@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity(), Contract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        button.setOnClickListener { presenter.login() }
+        loginBtn.setOnClickListener { presenter.login() }
     }
 
     override fun openGroupList() {

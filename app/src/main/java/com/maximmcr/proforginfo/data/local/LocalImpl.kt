@@ -1,7 +1,7 @@
 package com.maximmcr.proforginfo.data.local
 
-import com.maximmcr.proforginfo.data.UserMonthRepo
-import com.maximmcr.proforginfo.data.UserOrderRepo
+import com.maximmcr.proforginfo.data.LocalMonthRepo
+import com.maximmcr.proforginfo.data.LocalOrderRepo
 import com.maximmcr.proforginfo.data.local.model.Month
 import com.maximmcr.proforginfo.data.local.model.Month_
 import com.maximmcr.proforginfo.data.local.model.Order
@@ -14,7 +14,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class UserOrderImpl(boxStore: BoxStore) : UserOrderRepo {
+class LocalOrderImpl(boxStore: BoxStore) : LocalOrderRepo {
 
     private val monthes = boxStore.boxFor<Month>()
     private val orders = boxStore.boxFor<Order>()
@@ -53,7 +53,7 @@ class UserOrderImpl(boxStore: BoxStore) : UserOrderRepo {
     }
 }
 
-class UserMonthImpl(boxStore: BoxStore) : UserMonthRepo {
+class LocalMonthImpl(boxStore: BoxStore) : LocalMonthRepo {
 
     private val monthes = boxStore.boxFor<Month>()
 
@@ -91,17 +91,8 @@ class UserMonthImpl(boxStore: BoxStore) : UserMonthRepo {
         return Single.just(true)
     }
 
-    override fun getRemoteId(groupId: String): Observable<Pair<String, String>> {
-        throw RuntimeException("Stub!")
-    }
-
-    override fun sendOrder(order: com.maximmcr.proforginfo.data.foreign.model.Order): Single<Boolean> {
-        throw RuntimeException("Stub!")
-    }
-
-    override fun changePaymentStatus(status: Boolean, userId: String, monthId: String, timestamp: String): Single<Boolean> {
+    override fun changePaymentStatus(status: Boolean, timestamp: String): Single<Boolean> {
         monthes.find(Month_.timestamp, timestamp).first().isPayed = status
         return Single.just(status)
     }
-
 }
