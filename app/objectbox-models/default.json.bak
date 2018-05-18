@@ -1,0 +1,135 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "2:5535987793957273256",
+      "lastPropertyId": "6:4101888181017603421",
+      "name": "Month",
+      "properties": [
+        {
+          "id": "1:6772067265997793339",
+          "name": "id"
+        },
+        {
+          "id": "3:3789157607194395933",
+          "name": "timestamp"
+        },
+        {
+          "id": "5:5545199641612307034",
+          "name": "firebaseId"
+        },
+        {
+          "id": "6:4101888181017603421",
+          "name": "isPayed"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4977950093029591310",
+      "lastPropertyId": "27:5144149061472584016",
+      "name": "Order",
+      "properties": [
+        {
+          "id": "1:6043930440684959017",
+          "name": "id"
+        },
+        {
+          "id": "14:2839117430656099199",
+          "name": "customerName"
+        },
+        {
+          "id": "15:4029566666392051706",
+          "indexId": "3:4735837869850175304",
+          "name": "monthId"
+        },
+        {
+          "id": "16:2167327987829170535",
+          "name": "m"
+        },
+        {
+          "id": "17:6928839506648592753",
+          "name": "mBus"
+        },
+        {
+          "id": "18:3647170367681840423",
+          "name": "mTrolleybus"
+        },
+        {
+          "id": "19:7728298490542381324",
+          "name": "mTram"
+        },
+        {
+          "id": "20:3079256553899830008",
+          "name": "m46"
+        },
+        {
+          "id": "21:3715647875528192867",
+          "name": "mBus46"
+        },
+        {
+          "id": "22:8433864527541522015",
+          "name": "mTrolleybus46"
+        },
+        {
+          "id": "23:8949317007876556192",
+          "name": "mTram46"
+        },
+        {
+          "id": "24:8000696856713908478",
+          "name": "m62"
+        },
+        {
+          "id": "25:2120724672034171781",
+          "name": "mBus62"
+        },
+        {
+          "id": "26:6678530830629450538",
+          "name": "mTrolleybus62"
+        },
+        {
+          "id": "27:5144149061472584016",
+          "name": "mTram62"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:4977950093029591310",
+  "lastIndexId": "3:4735837869850175304",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [
+    1978743169688329574
+  ],
+  "retiredIndexUids": [
+    1955087371933829744,
+    6486991759835974668
+  ],
+  "retiredPropertyUids": [
+    5068632548672090273,
+    4772069323420874412,
+    789899924025013995,
+    7051816688505208394,
+    3585610074854372054,
+    8916130490548030803,
+    8879706574995629414,
+    7697689669593367330,
+    6466450783884052962,
+    1614360400579808082,
+    108235653451193070,
+    5204866197031545303,
+    8546563375979813712,
+    8054966383218991199,
+    7526495276704689057,
+    3306491275802945177,
+    203870317649002193,
+    6841811370066320914
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
