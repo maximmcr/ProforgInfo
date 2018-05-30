@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class BasePresenter<V: MvpView>: MvpPresenter<V> {
 
     var view: V? = null
-    private val subscriptions = CompositeDisposable()
+    val subscriptions = CompositeDisposable()
 
     override fun finish() {
         subscriptions.clear()

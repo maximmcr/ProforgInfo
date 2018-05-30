@@ -13,8 +13,9 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class LocalOrderImpl(boxStore: BoxStore) : LocalOrderRepo {
+class LocalOrderImpl @Inject constructor(boxStore: BoxStore) : LocalOrderRepo {
 
     private val monthes = boxStore.boxFor<Month>()
     private val orders = boxStore.boxFor<Order>()
@@ -53,7 +54,7 @@ class LocalOrderImpl(boxStore: BoxStore) : LocalOrderRepo {
     }
 }
 
-class LocalMonthImpl(boxStore: BoxStore) : LocalMonthRepo {
+class LocalMonthImpl @Inject constructor(boxStore: BoxStore) : LocalMonthRepo {
 
     private val monthes = boxStore.boxFor<Month>()
 

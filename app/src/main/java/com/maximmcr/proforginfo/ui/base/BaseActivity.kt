@@ -4,10 +4,6 @@ import dagger.android.support.DaggerAppCompatActivity
 
 abstract class BaseActivity : DaggerAppCompatActivity(), MvpView {
 
-    override fun onRetainCustomNonConfigurationInstance(): Any = getSavedPresenter()
-
-    abstract fun getSavedPresenter(): Any
-
     abstract fun attachPresenter()
     abstract fun detachPresenter()
     abstract fun finishPresenter()
@@ -20,8 +16,8 @@ abstract class BaseActivity : DaggerAppCompatActivity(), MvpView {
         super.onStop()
         detachPresenter()
     }
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun finish() {
+        super.finish()
         finishPresenter()
     }
 }

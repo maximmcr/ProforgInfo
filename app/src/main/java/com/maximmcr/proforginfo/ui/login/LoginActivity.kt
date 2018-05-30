@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
 import com.maximmcr.proforginfo.R
 import com.maximmcr.proforginfo.ui.base.BaseActivity
 import com.maximmcr.proforginfo.ui.groups.GroupsActivity
+import com.maximmcr.proforginfo.ui.signin.SigninActivity
 import dagger.Lazy
-import kotlinx.android.synthetic.main.activity_groups.*
-import javax.inject.Inject
-import com.firebase.ui.auth.IdpResponse
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 class LoginActivity : BaseActivity(), Contract.View {
 
@@ -34,8 +34,7 @@ class LoginActivity : BaseActivity(), Contract.View {
     }
 
     override fun openGroupList() {
-        val i = Intent(this, GroupsActivity::class.java)
-        startActivity(i)
+        startActivity(Intent(this, GroupsActivity::class.java))
     }
 
     override fun openLoginScreen() {
@@ -57,30 +56,27 @@ class LoginActivity : BaseActivity(), Contract.View {
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == RESULT_OK) {
-                presenter.processResult(true)
+                presenter.processLoginResult(true)
             } else {
                 response?.error?.printStackTrace()
-                presenter.processResult(false)
+                presenter.processLoginResult(false)
             }
         }
     }
 
     override fun showErrorMessage() {
-        Snackbar.make(main, "Something gone wrong", Snackbar.LENGTH_LONG)
+        Snackbar.make(login_main, "Something get wrong", Snackbar.LENGTH_LONG)
     }
-
-    override fun getSavedPresenter(): Any = presenter
 
     override fun attachPresenter() {
-        presenter = lastCustomNonConfigurationInstance as Contract.Presenter<Contract.View>? ?: presenterProvider.get()
-        presenter.subscribe(this)
+        presenter = presenterProvider.get().apply { subscribe(this@LoginActivity) }
     }
 
-    override fun detachPresenter() {
-        presenter.unsubscribe()
-    }
+    override fun detachPresenter() = presenter.unsubscribe()
 
-    override fun finishPresenter() {
-        presenter.finish()
+    override fun finishPresenter() = presenter.finish()
+
+    override fun openRegistrationForm() {
+        startActivity(Intent(this, SigninActivity::class.java))
     }
 }
